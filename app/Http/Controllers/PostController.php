@@ -12,7 +12,9 @@ class PostController extends Controller
     // Display list posts
     public function index()
     {
-        return view("posts.index");
+        $posts = Post::orderByDesc("created_at")->paginate(6);
+
+        return view("posts.index", ["posts" => $posts]);
     }
 
     // Show the form for creating a new post
