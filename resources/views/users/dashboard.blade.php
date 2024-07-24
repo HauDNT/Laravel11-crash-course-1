@@ -39,4 +39,20 @@
             <button class="btn">Create</button>
         </form>
     </div>
+
+    {{-- User list posts --}}
+    <h2 class="title mt-10">Your Latest Posts</h2>
+    <div class="grid grid-cols-2 gap-6">
+        @foreach ($posts as $post)
+            {{-- <x-postCard post="{{ $post }}" /> --}} 
+            {{-- Biến post là 1 object nên không thể truyền như kiểu trên mà phải truyền như bên dưới --}}
+            <x-postCard :post="$post" />
+        @endforeach
+    </div>
+
+    <div>
+        {{ $posts -> links() }}
+    </div>
+
+
 </x-layout>
