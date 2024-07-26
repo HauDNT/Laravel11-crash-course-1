@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <form action="{{ route("posts.store") }}" method="POST">
+        <form action="{{ route("posts.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             {{-- Post title --}}
@@ -40,6 +40,15 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
                 </textarea>            
+            </div>
+
+            {{-- Post image --}}
+            <div class="mb-4">
+                <label for="image">Cover photo</label>
+                <input type="file" name="image" id="image">
+                @error("image")
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <button class="btn">Create</button>

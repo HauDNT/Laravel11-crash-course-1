@@ -1,6 +1,15 @@
 @props(['post', 'full' => false])
 
 <div class="card relative pb-12">
+    {{-- Image --}}
+    <div>
+        @if ($post->image)
+            <img src="{{ asset("storage/" . $post->image) }}" alt="" class="rounded max-h-50">
+        @else
+            <img src="{{ asset("storage/posts_images/default.png") }}" alt="" class="rounded">
+        @endif
+    </div>
+
     {{-- Title --}}
     <h2 class="font-bold text-xl">
         {{ $post->title }}
