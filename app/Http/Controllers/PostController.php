@@ -37,9 +37,9 @@ class PostController extends Controller
         return back()->with("success", "Your post was created!");
     }
 
-    public function update(Request $request, Post $post)
+    public function show(Post $post)
     {
-        dd("OK");
+        return view("posts.show", ["post" => $post]);
     }
 
 

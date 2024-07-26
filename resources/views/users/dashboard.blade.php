@@ -46,7 +46,9 @@
         @foreach ($posts as $post)
             {{-- <x-postCard post="{{ $post }}" /> --}} 
             {{-- Biến post là 1 object nên không thể truyền như kiểu trên mà phải truyền như bên dưới --}}
-            <x-postCard :post="$post" />
+            <x-postCard :post="$post">
+                <p>Delete</p>
+            </x-postCard>
         @endforeach
     </div>
 
