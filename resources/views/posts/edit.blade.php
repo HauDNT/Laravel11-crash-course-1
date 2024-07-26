@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <form action="{{ route("posts.update", $post) }}" method="POST">
+        <form action="{{ route("posts.update", $post) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method("PUT")
 
@@ -35,7 +35,7 @@
             {{-- Post body --}}
             <div class="mb-4">
                 <label for="body">Post content</label>
-                <textarea name="body" rows="10" class="input
+                <textarea name="body" rows="3" class="input
                 @error("body") ring-offset-2 ring-red-500 @enderror">
                     {{ $post->body }}
 
@@ -44,6 +44,24 @@
                     @enderror
                 </textarea>            
             </div>
+
+            {{-- Current cover photo if exists --}}
+            @if ($post->image)
+                <div class="h-64 rounded-md mb-4 w-2/4 object-cover overflow-hidden">
+                    <label>Current cover photo</label>
+                    <img src="{{ asset("storage/" . $post->image) }}" alt="" class="rounded max-h-50">
+                </div>
+            @endif
+
+            {{-- Choose another image --}}
+            <div class="mb-4">
+                <label for="image">Choose another image</label>
+                <input type="file" name="image" id="image">
+                @error("image")
+                    <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
+
 
             <button class="btn">Update</button>
         </form>

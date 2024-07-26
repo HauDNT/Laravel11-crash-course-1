@@ -11,7 +11,7 @@
     </div>
 
     {{-- Title --}}
-    <h2 class="font-bold text-xl">
+    <h2 class="font-bold text-xl my-2">
         {{ $post->title }}
     </h2>
 
