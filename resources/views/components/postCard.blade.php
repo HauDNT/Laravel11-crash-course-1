@@ -1,6 +1,6 @@
 @props(['post', 'full' => false])
 
-<div class="card relative pb-10">
+<div class="card relative pb-12">
     {{-- Title --}}
     <h2 class="font-bold text-xl">
         {{ $post->title }}
@@ -24,9 +24,12 @@
         </div>
     @endif
 
+    <div class="absolute bottom-3 right-6">
+        {{ $slot }}
+    </div>
 
     {{-- Footer --}}
-    <div class="post-footer absolute right-3 bottom-2">
+    <div class="post-footer absolute left-6 bottom-3">
         <p>{{ $post->created_at }}</p>
     </div>
 </div>

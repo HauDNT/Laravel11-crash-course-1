@@ -1,4 +1,6 @@
 <x-layout>
+    <h1 class="title">Welcome {{ auth()->user()->username }}, you have {{ $posts->total() }} posts</h1>
+
     {{-- Create post form --}}
     <div class="card mb-4">
         <h2 class="font-bold mb-4">Create a new post</h2>
@@ -7,6 +9,10 @@
         @if (session("success"))
             <div class="mb-2">
                 <x-flashMsg msg="{{session('success')}}" bg="bg-green-500"/>
+            </div>
+        @elseif (session("delete")) 
+            <div class="mb-2">
+                <x-flashMsg msg="{{session('delete')}}" bg="bg-red-500"/>
             </div>
         @endif
 
@@ -47,7 +53,22 @@
             {{-- <x-postCard post="{{ $post }}" /> --}} 
             {{-- Biến post là 1 object nên không thể truyền như kiểu trên mà phải truyền như bên dưới --}}
             <x-postCard :post="$post">
-                <p>Delete</p>
+                <div class="flex">
+                    {{-- Update post --}}
+                    <a href="{{ route('posts.edit', $post) }}" class="flex items-center mr-3 justify-center px-3 h-9 rounded-md leading-loose bg-blue-400 text-white">
+                        Update
+                    </a>
+    
+                    {{-- Delete form --}}
+                    <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                        @csrf
+                        @method("DELETE")
+                        {{-- Fake method --}}
+                        <button class="flex items-center justify-center px-3 h-9 rounded-md leading-loose bg-red-400 text-white">
+                            Delete
+                        </button>
+                    </form>
+                </div>
             </x-postCard>
         @endforeach
     </div>

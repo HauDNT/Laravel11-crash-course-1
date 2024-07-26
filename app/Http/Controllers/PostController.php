@@ -42,5 +42,32 @@ class PostController extends Controller
         return view("posts.show", ["post" => $post]);
     }
 
+    public function edit(Post $post)
+    {
+        return view("posts.edit", ["post" => $post]);
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        // Validate:
+        $fields = $request->validate([
+            'title' => ["required", "max:255"],
+            'body' => ["required"],
+        ]);
+
+        // Update a post
+        $post->update($fields);
+
+        return back()->with("success", "Your post was updated!");
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        // Redirect to dashboard:
+        return back()->with('delete', 'Your post was deleted!');
+    }
+
 
 }
